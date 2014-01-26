@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+
+<form id="myForm" action="/nilton/" method="post"> 
+    Name: <input type="text" name="name" /> 
+    Comment: <textarea name="comment"></textarea> 
+    <input type="submit" value="Submit Comment" /> 
+</form>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery-1.10.2.min.js"></script>
+    <script src="/static/js/jquery.form.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() { 
+var options = { 
+    clearForm: true,
+    success:    function() { 
+        alert('Thanks for your comment!'); 
+    } 
+};
+
+$('#myForm').ajaxForm(options);
+
+}); 
+
+
+ </script>
+</body>
+</html> 

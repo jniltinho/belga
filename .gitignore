@@ -34,3 +34,10 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+
+## Add Nilton OS
+http.log
+comandos_git.sh
+.directory
+
