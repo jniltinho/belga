@@ -1,84 +1,651 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Nilton OS">
-    <link rel="shortcut icon" href="/static/img/favicon.png">
-
-    <title>Belga Manager Postfix</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/css/starter-template.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <title>Belga Mail System</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta content='text/html;charset=utf-8' http-equiv='content-type'>
+    <meta content='Flat administration template for Twitter Bootstrap. Twitter Bootstrap 3 template with Ruby on Rails support.' name='description'>
+    <link href='/static/assets/images/meta_icons/favicon.png' rel='shortcut icon' type='image/x-icon'>
+    <!-- / START - page related stylesheets [optional] -->
+        <link href="/static/assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- / END - page related stylesheets [optional] -->
+    <!-- / bootstrap [required] -->
+    <link href="/static/assets/stylesheets/bootstrap/bootstrap.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- / theme file [required] -->
+    <link href="/static/assets/stylesheets/dark-theme.css" media="all" id="color-settings-body-color" rel="stylesheet" type="text/css" />
+    <!-- / coloring file [optional] (if you are going to use custom contrast color) -->
+    <link href="/static/assets/stylesheets/theme-colors.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- / demo file [not required!] -->
+    <link href="/static/assets/stylesheets/demo.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/font-awesome/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css" />
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <script src="/static/assets/javascripts/ie/html5shiv.js" type="text/javascript"></script>
+      <script src="/static/assets/javascripts/ie/respond.min.js" type="text/javascript"></script>
     <![endif]-->
   </head>
+  <body class='contrast-dark fixed-header fixed-navigation main-nav-closed'>
+    <header>
+      <nav class='navbar navbar-default navbar-fixed-top'>
+        <a class='navbar-brand' href='/'>
+        <i class="fa fa-envelope fa-1g fa-inverse"> Belga Mail System</i>
+        </a>
 
-  <body>
+        <ul class='nav'>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Belga</a>
-        </div>
-        <div id="services" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a data-url="/nilton" href="#">Nilton</a></li>
-            <li><a data-url="/antispam" href="#">Antispam</a></li>
+          <li class='dropdown dark user-menu'>
+            <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
+              <i class='fa fa-user fa-1g fa-inverse'></i>
+              <span class='user-name'>Administrator</span>
+              <b class='caret'></b>
+            </a>
+            <ul class='dropdown-menu'>
+              <li>
+                <a href='/user_profile'>
+                  <i class='icon-user'></i>
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href='/user_profile'>
+                  <i class='icon-cog'></i>
+                  Settings
+                </a>
+              </li>
+              <li class='divider'></li>
+              <li>
+                <a href='/login'>
+                  <i class='icon-signout'></i>
+                  Sign out
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <form action='search_results.html' class='navbar-form navbar-right hidden-xs' method='get'>
+          <button class='btn btn-link icon-search' name='button' type='submit'></button>
+          <div class='form-group'>
+            <input value="" class="form-control" placeholder="Search..." autocomplete="off" id="q_header" name="q" type="text" />
+          </div>
+        </form>
+      </nav>
+    </header>
+    <div id='wrapper'>
+      <div id='main-nav-bg'></div>
+      <nav class='main-nav-fixed' id='main-nav'>
+        <div class='navigation'>
+          <div class='search'>
+            <form action='search_results.html' method='get'>
+              <div class='search-wrapper'>
+                <input value="" class="search-query form-control" placeholder="Search..." autocomplete="off" name="q" type="text" />
+                <button class='btn btn-link icon-search' name='button' type='submit'></button>
+              </div>
+            </form>
+          </div>
+          <ul class='nav nav-stacked'>
+            <li class=''>
+              <a href='/'>
+                <i class='icon-dashboard'></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class=''>
+                      <a class="dropdown-collapse" href="#"><i class='icon-edit'></i>
+              <span>Forms</span>
+              <i class='icon-angle-down angle-down'></i>
+              </a>
+      
+              <ul class='nav nav-stacked'>
+                <li class=''>
+                  <a href='form_styles.html'>
+                    <i class='icon-caret-right'></i>
+                    <span>Form styles and features</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='form_components.html'>
+                    <i class='icon-caret-right'></i>
+                    <span>Form components</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='validations.html'>
+                    <i class='icon-caret-right'></i>
+                    <span>Validations</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='wizard.html'>
+                    <i class='icon-caret-right'></i>
+                    <span>Wizard</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+            <li>
+              <a class='dropdown-collapse ' href='#'>
+                <i class='icon-cogs'></i>
+                <span>Components</span>
+                <i class='icon-angle-down angle-down'></i>
+              </a>
+              <ul class='nav nav-stacked'>
+                <li class=''>
+                  <a href='charts.html'>
+                    <i class='icon-bar-chart'></i>
+                    <span>Charts</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='address_book.html'>
+                    <i class='icon-envelope'></i>
+                    <span>Address book</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='chats.html'>
+                    <i class='icon-comments'></i>
+                    <span>Chats</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='filetrees.html'>
+                    <i class='icon-list-ul'></i>
+                    <span>File trees</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='fileupload.html'>
+                    <i class='icon-file'></i>
+                    <span>Fileupload</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='todo.html'>
+                    <i class='icon-list-alt'></i>
+                    <span>Todo list</span>
+                  </a>
+                </li>
+                <li class=''>
+                  <a href='wysiwyg.html'>
+                    <i class='icon-paste'></i>
+                    <span>WYSIWYG</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
           </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+        </div>
+      </nav>
+      <section id='content'>
+        <div class='container'>
+          <div class='row' id='content-wrapper'>
+            <div class='col-xs-12'>
+              <div class='row'>
+                <div class='col-sm-12'>
+                  <div class='page-header'>
+                    <h1 class='pull-left'>
+                      <i class='icon-dashboard'></i>
+                        <span>Dashboard</span>
+                    </h1>
+                    <div class='pull-right'>
+                      <ul class='breadcrumb'>
+                        <li>
+                          <a href='/'>
+                            <i class='icon-bar-chart'></i>
+                          </a>
+                        </li>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li class='active'>Dashboard</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+                 <div class='col-sm-12'>
+                  <div class='box bordered-box blue-border' style='margin-bottom:0;'>
+                    <div class='box-header blue-background'>
+                      <div class='title pull-left'>Client: Domain US</div>
+                      <div class='title pull-right'>Domain: domain.com</div>
+                    </div>
+                    <div class='box-content box-no-padding'>
+                      <div class='responsive-table'>
+                        <div class='scrollable-area'>
+                          <table class='data-table table table-bordered' data-pagination-records='5' style='margin-bottom:0;'>
+                            <thead>
+                              <tr>
+                                <th>
+                                  Name
+                                </th>
+                                <th>
+                                  E-mail
+                                </th>
+                                <th>
+                                  Status
+                                </th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Janick Williamson</td>
+                                <td>johnson@domain.com</td>
+                                <td>
+                                  <span class='label label-important'>Important</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Javonte Sipes</td>
+                                <td>reina@domain.com</td>
+                                <td>
+                                  <span class='label label-success'>Success</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Lottie Cormier</td>
+                                <td>mattie@domain.com</td>
+                                <td>
+                                  <span class='label label-success'>Success</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Madelyn Senger</td>
+                                <td>harmon@domain.com</td>
+                                <td>
+                                  <span class='label label-success'>Success</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Elenora Dickinson</td>
+                                <td>yasmine@domain.com</td>
+                                <td>
+                                  <span class='label label-important'>Important</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Cristina Wilderman</td>
+                                <td>loraine@domain.com</td>
+                                <td>
+                                  <span class='label label-important'>Important</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Lucinda Bradtke</td>
+                                <td>carlee@domain.com</td>
+                                <td>
+                                  <span class='label label-warning'>Warning</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Leilani Stark</td>
+                                <td>wilbert@domain.com</td>
+                                <td>
+                                  <span class='label label-important'>Important</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Dasia Padberg</td>
+                                <td>lucius@domain.com</td>
+                                <td>
+                                  <span class='label label-warning'>Warning</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Fanny Pollich</td>
+                                <td>sylvia@domain.com</td>
+                                <td>
+                                  <span class='label label-success'>Success</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Vergie Jacobson</td>
+                                <td>layla@domain.com</td>
+                                <td>
+                                  <span class='label label-warning'>Warning</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Macie Price</td>
+                                <td>myriam@domain.com</td>
+                                <td>
+                                  <span class='label label-warning'>Warning</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Annamarie Bauch</td>
+                                <td>don@domain.com</td>
+                                <td>
+                                  <span class='label label-important'>Important</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Brandy Romaguera</td>
+                                <td>boris@domain.com</td>
+                                <td>
+                                  <span class='label label-important'>Important</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Jarret Schmidt</td>
+                                <td>jimmie@domain.com</td>
+                                <td>
+                                  <span class='label label-warning'>Warning</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Mckenna Ondricka</td>
+                                <td>katelin@domain.com</td>
+                                <td>
+                                  <span class='label label-important'>Important</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Adelbert Ullrich</td>
+                                <td>joyce@domain.com</td>
+                                <td>
+                                  <span class='label label-warning'>Warning</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Celia Wuckert</td>
+                                <td>jermaine@domain.com</td>
+                                <td>
+                                  <span class='label label-success'>Success</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Patsy Botsford</td>
+                                <td>romaine@domain.com</td>
+                                <td>
+                                  <span class='label label-warning'>Warning</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Rey Mante</td>
+                                <td>aylin@domain.com</td>
+                                <td>
+                                  <span class='label label-success'>Success</span>
+                                </td>
+                                <td>
+                                  <div class='text-right'>
+                                    <a class='btn btn-success btn-xs' href='#'>
+                                      <i class='icon-ok'></i>
+                                    </a>
+                                    <a class='btn btn-danger btn-xs' href='#'>
+                                      <i class='icon-remove'></i>
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+               
+              <br>  
+              <div class='col-sm-12'>
+              Eius temporibus non velit. voluptatem necessitatibus hic debitis fugiat expedita dolore voluptatum aperiam vel nihil. accusantium dolorem voluptate est nemo fuga beatae voluptas est. ducimus quasi voluptatum officia mollitia animi ipsam saepe magnam. earum id unde magni eligendi aut et. sed explicabo dicta alias tempore neque possimus in rem animi sed quaerat qui
+              <br>
+              <br>
+              Assumenda dolore quo quidem fuga ut atque sit. modi assumenda ut sit esse doloremque amet est voluptas impedit. id voluptatem aut sint aut eos illum quae ut at nihil animi aut. autem natus quod mollitia enim nobis quibusdam est similique ut architecto. ut aut suscipit voluptatum saepe non facilis repellendus magnam ut
+              <br>
+              <br>
+              Est totam saepe ex doloribus expedita explicabo ex saepe dolor est non ipsam. neque ut veritatis aut sed exercitationem qui veritatis debitis sapiente harum voluptatum doloremque eveniet id. aliquid amet autem ad voluptatem ut. nostrum similique quaerat accusamus rem nam quia quod molestias ea dolores
+              <br>
+              <br>
+              Omnis et dolores cumque dolor est et vero eius vel dicta illum. omnis nihil aliquid quisquam unde cumque nihil fugit ut reiciendis dolores ipsa aut ut. voluptatem quaerat dolorem quisquam. aut et velit ducimus ipsa nobis cum ut. consequuntur nesciunt in autem et exercitationem consectetur omnis et enim beatae corporis. unde aliquid in aut aspernatur eius numquam architecto voluptatem distinctio eius optio distinctio facere reprehenderit
+              <br>
+              <br>
+              Itaque qui necessitatibus quia voluptatem labore ut expedita eum. expedita qui odit dolorem velit autem est illo error inventore soluta ab aut sequi. deserunt repudiandae nesciunt repellat placeat molestiae illum quos est dolor placeat veritatis eum incidunt tempore. dolorem veniam corrupti vero ipsum blanditiis. sint cupiditate earum possimus ipsum
+              <br>
+              <br>
+              Rerum quis officiis est. ex magnam in et similique. dolores enim pariatur praesentium sit nam velit autem et sequi est ullam. voluptatem et fugit et unde harum corporis reiciendis quia praesentium qui tempora culpa et. placeat quisquam nulla sit pariatur est ab aut voluptas dolores ad eaque at et dicta. voluptatem et est deleniti deserunt alias
+              <br>
+              <br>
+            </div>
+
+
+                
+ </div>
+        
+          <footer id='footer'>
+            <div class='footer-wrapper'>
+              <div class='row'>
+                <div class='col-sm-6 text'>
+                  Copyright © 2014 Belga Project
+                </div>
+                <div class='col-sm-6 buttons'>
+                  <a class="btn btn-link" target="_blank" href="https://github.com/jniltinho/belga">Github</a>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </section>
     </div>
-
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div>
-
-       <div id='content'></div>
-
-    </div><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/js/jquery-1.10.2.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-
- <script type="text/javascript">
-
-$(document).ready(function(){
-  $('#services a').click(function(e){
-     e.preventDefault();
-     $("#content").load($(this).attr('data-url'));
-  });
-});
-
- </script>
-
-
+    <!-- / jquery [required] -->
+    <script src="/static/assets/javascripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <!-- / jquery mobile (for touch events) -->
+    <script src="/static/assets/javascripts/jquery/jquery.mobile.custom.min.js" type="text/javascript"></script>
+    <!-- / jquery migrate (for compatibility with new jquery) [required] -->
+    <script src="/static/assets/javascripts/jquery/jquery-migrate.min.js" type="text/javascript"></script>
+    <!-- / jquery ui -->
+    <script src="/static/assets/javascripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
+    <!-- / jQuery UI Touch Punch -->
+    <script src="/static/assets/javascripts/plugins/jquery_ui_touch_punch/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+    <!-- / bootstrap [required] -->
+    <script src="/static/assets/javascripts/bootstrap/bootstrap.js" type="text/javascript"></script>
+    <!-- / modernizr -->
+    <script src="/static/assets/javascripts/plugins/modernizr/modernizr.min.js" type="text/javascript"></script>
+    <!-- / retina -->
+    <script src="/static/assets/javascripts/plugins/retina/retina.js" type="text/javascript"></script>
+    <!-- / theme file [required] -->
+    <script src="/static/assets/javascripts/theme.js" type="text/javascript"></script>
+    <!-- / demo file [not required!] -->
+    <script src="/static/assets/javascripts/demo.js" type="text/javascript"></script>
+    <!-- / START - page related files and scripts [optional] -->
+    <script src="/static/assets/javascripts/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/static/assets/javascripts/plugins/datatables/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
+    <script src="/static/assets/javascripts/plugins/datatables/dataTables.overrides.js" type="text/javascript"></script>    
+    <!-- / END - page related files and scripts [optional] -->
   </body>
 </html>
-
